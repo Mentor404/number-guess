@@ -1,0 +1,3 @@
+/home/mentor/CLionProjects/number-guess/cmake-build-debug/CMakeFiles/number_guess.dir
+/home/mentor/CLionProjects/number-guess/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/mentor/CLionProjects/number-guess/cmake-build-debug/CMakeFiles/rebuild_cache.dir
