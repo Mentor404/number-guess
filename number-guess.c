@@ -2,64 +2,92 @@
 // Created by mentor on 27/07/22.
 //
 #include <stdio.h>
-#include <locale.h>
 #include <stdlib.h>
 #include <time.h>
 
 int main(){
-    setlocale(LC_ALL, "Portuguese");
     time_t t;
     srand((unsigned) time(&t));
-    int difficulty = 0;
+    int i, difficulty = 0;
     int randomE = rand() % 20;
     int randomM = rand() % 100;
-    int randomH = rand() % 1000;
-    int i;
+    int randomH = rand() % 500;
 
     printf("%d\n", randomE);
     printf("%d\n", randomM);
     printf("%d\n", randomH);
 
-    printf("chose the difficulty: \n");
-    printf("1 - easy(1-20)\n2 - medium(1-100)\n3 - hard(1-1000)\n");
+    printf("Choose the difficulty: \n");
+    printf("1 - Easy(1-20)\n2 - Medium(1-100)\n3 - Hard(1-500)\n");
     scanf("%d", &difficulty);
     if(difficulty == 1){
-        printf("the difficult are set at easy (1-20)\n");
+        printf("The difficulty was defined as Easy (1-20)\n");
     } else if(difficulty == 2){
-        printf("the difficult are set at medium (1-100)\n");
+        printf("The difficulty was defined as Medium (1-100)\n");
     } else{
-        printf("the difficult are set at hard (1-1000)\n");
+        printf("The difficulty was defined as Hard (1-1000)\n");
     }
-    printf("try guess the number, you have 10 tries\n");
-    for(i = 10; i != 0; i--){
-        int guess;
-        scanf("%d", &guess);
+    printf("Try to guess, you have 10 tries\n");
+    for(i = 0; i != 10; i++){
+        int guess[100];
+        scanf("%d", &guess[i]);
         if(difficulty == 1){
-            if(guess == randomE){
-                printf("you win\nthe number are %d", randomE);
+            if(guess[i] == randomE){
+                printf("You win!\nThe number was: %d", randomE);
                 break;
-            } else if(guess > 20){
-                printf("the number is less than 20\n");
-                i += 1;
-            } else if(guess < 1){
-                printf("the number is greater than 1\n");
-                i += 1;
+            } else if(guess[i] == guess[i-1]){
+                printf("You already tried this number\n");
+                i--;
+            } else if(guess[i] > 20){
+                printf("The number is less than 20\n");
+                i--;
+            } else if(guess[i] < 1){
+                printf("The number is greater than 1\n");
+                i--;
+            } else if(guess[i] > randomE){
+                printf("Your guess is too high\nYou have %d tries left\n", 9-i);
+            } else if(guess[i] < randomE){
+                printf("Your guess is too low\nYou have %d tries left\n", 9-i);
             } else{
-                printf("try again, you have %d tries left\n", i-1);
+                if(i+1 == 10){
+                    printf("You lose!\nThe number was: %d", randomE);
+                } else {
+                    printf("Try again, you have %d tries left\n", 9-i);
+                }
             }
         } else if(difficulty == 2){
-            if(guess == randomM){
-                printf("you win\nthe number are %d", randomM);
+            if(guess[i] == randomM){
+                printf("You win!\nThe number was: %d", randomM);
                 break;
+            } else if(guess[i] > 20){
+                printf("The number is less than 100\n");
+                i--;
+            } else if(guess[i] < 1){
+                printf("The number is greater than 1\n");
+                i--;
             } else{
-                printf("try again, you have %d tries left\n", i-1);
+                if(i-1 == 0){
+                    printf("You lose!\nThe number was: %d", randomE);
+                } else {
+                    printf("Try again, you have %d tries left\n", 9-i);
+                }
             }
         } else{
-            if(guess == randomH){
-                printf("you win\nthe number are %d", randomH);
+            if(guess[i] == randomH){
+                printf("You win!\nThe number was: %d", randomH);
                 break;
+            } else if(guess[i] > 20){
+                printf("The number is less than 500\n");
+                i--;
+            } else if(guess[i] < 1){
+                printf("The number is greater than 1\n");
+                i--;
             } else{
-                printf("try again, you have %d tries left\n", i-1);
+                if(i-1 == 0){
+                    printf("You lose!\nThe number was: %d", randomE);
+                } else {
+                    printf("Try again, you have %d tries left\n", 9-i);
+                }
             }
         }
     }
